@@ -1,0 +1,52 @@
+version: '3.4'
+
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: 1234
+      bind-address: 0.0.0.0
+    volumes:
+      - vol-postgres:/var/lib/postgresql/data
+      - ./src/BigGameSurvey.Api/InitialScript:/docker-entrypoint-initdb.d
+    networks:
+      - backend
+  
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - backend
+    depends_on:
+      - postgres
+  
+  # biggamesurveyapi:
+  #   image: ${DOCKER_REGISTRY-}biggamesurveyapi
+  #   build:
+  #     context: .
+  #     dockerfile: src/BigGameSurvey.Api/Dockerfile
+  #   environment:
+  #     DBHOST: "postgres"
+  #     DBPORT: 5432
+  #     DBNAME: "BigDataSurvey"
+  #     DBUSER: "postgres"
+  #     DBPASSWORD: 1234
+  #     ASPNETCORE_ENVIRONMENT: "Development"
+  #   networks:
+  #     - backend
+  #   depends_on:
+  #     - postgres
+
+volumes:
+  vol-postgres:
+
+networks:
+  backend:
+    driver: bridge

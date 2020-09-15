@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigGameSurvey.Api", "src\BigGameSurvey.Api\BigGameSurvey.Api.csproj", "{728FF756-6A8F-4DF5-B0C1-E97FCC0A7061}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F1F53FCE-8EFC-4952-8E9A-DA9686A9E9E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{728FF756-6A8F-4DF5-B0C1-E97FCC0A7061}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{728FF756-6A8F-4DF5-B0C1-E97FCC0A7061}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{728FF756-6A8F-4DF5-B0C1-E97FCC0A7061}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{728FF756-6A8F-4DF5-B0C1-E97FCC0A7061}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1F53FCE-8EFC-4952-8E9A-DA9686A9E9E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1F53FCE-8EFC-4952-8E9A-DA9686A9E9E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1F53FCE-8EFC-4952-8E9A-DA9686A9E9E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1F53FCE-8EFC-4952-8E9A-DA9686A9E9E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F794988C-D563-4184-8547-89BE00893720}
+	EndGlobalSection
+EndGlobal
