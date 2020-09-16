@@ -15,6 +15,9 @@ namespace BigGameSurvey.Api.EntitiesMap
             builder.ToTable("TB_GENRE").HasKey(g => g.Id);
 
             builder
+                .Property(r => r.Id)
+                .HasColumnName("PK_ID");
+            builder
                 .Property(g => g.Name)
                 .HasColumnName("DS_NAME")
                 .HasMaxLength(50)

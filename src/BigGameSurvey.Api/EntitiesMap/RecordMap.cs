@@ -15,9 +15,16 @@ namespace BigGameSurvey.Api.EntitiesMap
             builder.ToTable("TB_RECORD").HasKey(t => t.Id);
 
             builder
+                .Property(r => r.Id)
+                .HasColumnName("PK_ID");
+            builder
                 .Property(r => r.Name)
                 .HasColumnName("DS_NAME")
                 .HasMaxLength(50)
+                .IsRequired();
+            builder
+                .Property(r => r.Age)
+                .HasColumnName("NR_AGE")
                 .IsRequired();
             builder
                 .Property(r => r.InsertedAt)

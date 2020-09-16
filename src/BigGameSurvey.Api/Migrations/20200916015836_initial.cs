@@ -12,20 +12,20 @@ namespace BigGameSurvey.Api.Migrations
                 name: "TB_GENRE",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    PK_ID = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DS_NAME = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TB_GENRE", x => x.Id);
+                    table.PrimaryKey("PK_TB_GENRE", x => x.PK_ID);
                 });
 
             migrationBuilder.CreateTable(
                 name: "TB_GAME",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    PK_ID = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DS_TITLE = table.Column<string>(maxLength: 50, nullable: false),
                     DS_PLATFORM = table.Column<string>(maxLength: 20, nullable: false),
@@ -33,12 +33,12 @@ namespace BigGameSurvey.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TB_GAME", x => x.Id);
+                    table.PrimaryKey("PK_TB_GAME", x => x.PK_ID);
                     table.ForeignKey(
                         name: "FK_TB_GAME_TB_GENRE_FK_GENRE",
                         column: x => x.FK_GENRE,
                         principalTable: "TB_GENRE",
-                        principalColumn: "Id",
+                        principalColumn: "PK_ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -46,21 +46,21 @@ namespace BigGameSurvey.Api.Migrations
                 name: "TB_RECORD",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    PK_ID = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DS_NAME = table.Column<string>(maxLength: 50, nullable: false),
-                    Age = table.Column<int>(nullable: false),
+                    NR_AGE = table.Column<int>(nullable: false),
                     DT_INSERTEDAT = table.Column<DateTime>(nullable: false),
                     FK_GAME = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TB_RECORD", x => x.Id);
+                    table.PrimaryKey("PK_TB_RECORD", x => x.PK_ID);
                     table.ForeignKey(
                         name: "FK_TB_RECORD_TB_GAME_FK_GAME",
                         column: x => x.FK_GAME,
                         principalTable: "TB_GAME",
-                        principalColumn: "Id",
+                        principalColumn: "PK_ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 

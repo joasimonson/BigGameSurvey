@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   postgres:
-    image: postgres:latest
+    image: postgres
     restart: always
     expose:
       - 5432
