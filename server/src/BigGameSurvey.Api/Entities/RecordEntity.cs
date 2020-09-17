@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BigGameSurvey.Api.Entities
 {
-    public class Record
+    public class RecordEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -13,6 +13,6 @@ namespace BigGameSurvey.Api.Entities
         public DateTime InsertedAt { get; set; }
         public int GameId { get; set; }
 
-        public Game Game { get; set; }
+        public GameEntity Game { get; set; }
     }
 }

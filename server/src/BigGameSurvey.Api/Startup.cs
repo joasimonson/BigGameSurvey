@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using BigGameSurvey.Api.Contexts;
 using BigGameSurvey.Api.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -43,7 +44,7 @@ namespace BigGameSurvey.Api
                 string pwd = Configuration["DBPASSWORD"];
 
                 string connection = String.Format(connectionBase, host, port, db, user, pwd);
-                Console.WriteLine(connection);
+
                 services.AddDbContext<ApiContext>(options => options.UseNpgsql(connection));
             }
             else
@@ -60,7 +61,22 @@ namespace BigGameSurvey.Api
 
             services.AddControllers();
 
+            services.AddCors();
+
+            ConfigureMapping(services);
             ConfigureSwagger(services);
+        }
+
+        private void ConfigureMapping(IServiceCollection services)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(typeof(EntityToDTOProfile));
+            });
+
+            IMapper mapper = config.CreateMapper();
+
+            services.AddSingleton(mapper);
         }
 
         private void ConfigureSwagger(IServiceCollection services)
@@ -125,6 +141,8 @@ namespace BigGameSurvey.Api
             //var options = new RewriteOptions();
             //options.AddRedirect("^$", "swagger");
             //app.UseRewriter(options);
+
+            app.UseCors(opt => opt.AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BigGameSurvey.Api.Contexts;
 using BigGameSurvey.Api.Entities;
+using BigGameSurvey.Api.DTO;
+using AutoMapper;
 
 namespace BigGameSurvey.Api.Controllers
 {
@@ -15,22 +17,31 @@ namespace BigGameSurvey.Api.Controllers
     public class RecordsController : ControllerBase
     {
         private readonly ApiContext _context;
+        private readonly IMapper _mapper;
 
-        public RecordsController(ApiContext context)
+        public RecordsController(ApiContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Records
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Record>>> GetRecords()
+        public async Task<ActionResult<IEnumerable<RecordDTO>>> GetRecords()
         {
-            return await _context.Records.ToListAsync();
+            var rec = await _context.Records
+                .Include(r => r.Game)
+                    .ThenInclude(g => g.Genre)
+                .ToListAsync();
+
+            var ret = _mapper.Map<List<RecordDTO>>(rec);
+
+            return ret;
         }
 
         // GET: api/Records/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Record>> GetRecord(int id)
+        public async Task<ActionResult<RecordEntity>> GetRecord(int id)
         {
             var record = await _context.Records.FindAsync(id);
 
@@ -46,7 +57,7 @@ namespace BigGameSurvey.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRecord(int id, Record record)
+        public async Task<IActionResult> PutRecord(int id, RecordEntity record)
         {
             if (id != record.Id)
             {
@@ -78,7 +89,7 @@ namespace BigGameSurvey.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Record>> PostRecord(Record record)
+        public async Task<ActionResult<RecordEntity>> PostRecord(RecordEntity record)
         {
             _context.Records.Add(record);
             await _context.SaveChangesAsync();
@@ -88,7 +99,7 @@ namespace BigGameSurvey.Api.Controllers
 
         // DELETE: api/Records/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Record>> DeleteRecord(int id)
+        public async Task<ActionResult<RecordEntity>> DeleteRecord(int id)
         {
             var record = await _context.Records.FindAsync(id);
             if (record == null)

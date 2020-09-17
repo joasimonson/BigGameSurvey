@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace BigGameSurvey.Api.EntitiesMap
 {
-    public class GameMap : IEntityTypeConfiguration<Game>
+    public class GameMap : IEntityTypeConfiguration<GameEntity>
     {
-        public void Configure(EntityTypeBuilder<Game> builder)
+        public void Configure(EntityTypeBuilder<GameEntity> builder)
         {
             builder.ToTable("TB_GAME").HasKey(g => g.Id);
 

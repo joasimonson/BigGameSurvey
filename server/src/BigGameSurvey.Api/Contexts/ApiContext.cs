@@ -1,10 +1,7 @@
 ﻿using BigGameSurvey.Api.Entities;
 using BigGameSurvey.Api.EntitiesMap;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace BigGameSurvey.Api.Contexts
 {
@@ -15,15 +12,31 @@ namespace BigGameSurvey.Api.Contexts
             Database.Migrate();
         }
 
-        public DbSet<Game> Games { get; set; }
-        public DbSet<Genre> Genres { get; set; }
-        public DbSet<Record> Records { get; set; }
+        public DbSet<GameEntity> Games { get; set; }
+        public DbSet<GenreEntity> Genres { get; set; }
+        public DbSet<RecordEntity> Records { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new GameMap());
             builder.ApplyConfiguration(new GenreMap());
             builder.ApplyConfiguration(new RecordMap());
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder
+             .EnableSensitiveDataLogging(true)
+             .UseLoggerFactory(LoggerFactory.Create(builder =>
+             {
+                 builder
+                  .AddFilter((category, level) =>
+                     category == DbLoggerCategory.Database.Command.Name
+                     && level == LogLevel.Information)
+                  .AddConsole();
+             }));
+
+            base.OnConfiguring(optionsBuilder);
         }
     }
 }

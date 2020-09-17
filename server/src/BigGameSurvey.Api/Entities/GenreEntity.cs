@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace BigGameSurvey.Api.Entities
 {
-    public class Genre
+    public class GenreEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public IEnumerable<Game> Games { get; set; }
+        public IEnumerable<GameEntity> Games { get; set; }
     }
 }

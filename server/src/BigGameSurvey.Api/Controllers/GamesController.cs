@@ -23,14 +23,14 @@ namespace BigGameSurvey.Api.Controllers
 
         // GET: api/Games
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Game>>> GetGames()
+        public async Task<ActionResult<IEnumerable<GameEntity>>> GetGames()
         {
             return await _context.Games.ToListAsync();
         }
 
         // GET: api/Games/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Game>> GetGame(int id)
+        public async Task<ActionResult<GameEntity>> GetGame(int id)
         {
             var game = await _context.Games.FindAsync(id);
 
@@ -46,7 +46,7 @@ namespace BigGameSurvey.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGame(int id, Game game)
+        public async Task<IActionResult> PutGame(int id, GameEntity game)
         {
             if (id != game.Id)
             {
@@ -78,7 +78,7 @@ namespace BigGameSurvey.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Game>> PostGame(Game game)
+        public async Task<ActionResult<GameEntity>> PostGame(GameEntity game)
         {
             _context.Games.Add(game);
             await _context.SaveChangesAsync();
@@ -88,7 +88,7 @@ namespace BigGameSurvey.Api.Controllers
 
         // DELETE: api/Games/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Game>> DeleteGame(int id)
+        public async Task<ActionResult<GameEntity>> DeleteGame(int id)
         {
             var game = await _context.Games.FindAsync(id);
             if (game == null)

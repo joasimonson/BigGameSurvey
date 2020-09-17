@@ -23,14 +23,14 @@ namespace BigGameSurvey.Api.Controllers
 
         // GET: api/Genres
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Genre>>> GetGenres()
+        public async Task<ActionResult<IEnumerable<GenreEntity>>> GetGenres()
         {
             return await _context.Genres.ToListAsync();
         }
 
         // GET: api/Genres/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Genre>> GetGenre(int id)
+        public async Task<ActionResult<GenreEntity>> GetGenre(int id)
         {
             var genre = await _context.Genres.FindAsync(id);
 
@@ -46,7 +46,7 @@ namespace BigGameSurvey.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGenre(int id, Genre genre)
+        public async Task<IActionResult> PutGenre(int id, GenreEntity genre)
         {
             if (id != genre.Id)
             {
@@ -78,7 +78,7 @@ namespace BigGameSurvey.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Genre>> PostGenre(Genre genre)
+        public async Task<ActionResult<GenreEntity>> PostGenre(GenreEntity genre)
         {
             _context.Genres.Add(genre);
             await _context.SaveChangesAsync();
@@ -88,7 +88,7 @@ namespace BigGameSurvey.Api.Controllers
 
         // DELETE: api/Genres/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Genre>> DeleteGenre(int id)
+        public async Task<ActionResult<GenreEntity>> DeleteGenre(int id)
         {
             var genre = await _context.Genres.FindAsync(id);
             if (genre == null)
