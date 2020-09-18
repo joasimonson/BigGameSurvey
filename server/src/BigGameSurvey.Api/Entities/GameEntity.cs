@@ -9,7 +9,7 @@ namespace BigGameSurvey.Api.Entities
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Platform { get; set; }
+        public int Platform { get; set; }
         public int GenreId { get; set; }
 
         public GenreEntity Genre { get; set; }

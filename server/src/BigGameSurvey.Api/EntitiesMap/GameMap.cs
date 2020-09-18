@@ -24,8 +24,7 @@ namespace BigGameSurvey.Api.EntitiesMap
                 .IsRequired();
             builder
                 .Property(g => g.Platform)
-                .HasColumnName("DS_PLATFORM")
-                .HasMaxLength(20)
+                .HasColumnName("FK_PLATFORM")
                 .IsRequired();
             builder
                 .Property(g => g.GenreId)

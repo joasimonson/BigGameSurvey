@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BigGameSurvey.Api.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20200916015836_initial")]
-    partial class initial
+    [Migration("20200918035143_dbdata")]
+    partial class dbdata
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace BigGameSurvey.Api.Migrations
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("BigGameSurvey.Api.Entities.Game", b =>
+            modelBuilder.Entity("BigGameSurvey.Api.Entities.GameEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,11 +33,9 @@ namespace BigGameSurvey.Api.Migrations
                         .HasColumnName("FK_GENRE")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Platform")
-                        .IsRequired()
-                        .HasColumnName("DS_PLATFORM")
-                        .HasColumnType("character varying(20)")
-                        .HasMaxLength(20);
+                    b.Property<int>("Platform")
+                        .HasColumnName("FK_PLATFORM")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -52,7 +50,7 @@ namespace BigGameSurvey.Api.Migrations
                     b.ToTable("TB_GAME");
                 });
 
-            modelBuilder.Entity("BigGameSurvey.Api.Entities.Genre", b =>
+            modelBuilder.Entity("BigGameSurvey.Api.Entities.GenreEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -71,7 +69,7 @@ namespace BigGameSurvey.Api.Migrations
                     b.ToTable("TB_GENRE");
                 });
 
-            modelBuilder.Entity("BigGameSurvey.Api.Entities.Record", b =>
+            modelBuilder.Entity("BigGameSurvey.Api.Entities.RecordEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -104,18 +102,18 @@ namespace BigGameSurvey.Api.Migrations
                     b.ToTable("TB_RECORD");
                 });
 
-            modelBuilder.Entity("BigGameSurvey.Api.Entities.Game", b =>
+            modelBuilder.Entity("BigGameSurvey.Api.Entities.GameEntity", b =>
                 {
-                    b.HasOne("BigGameSurvey.Api.Entities.Genre", "Genre")
+                    b.HasOne("BigGameSurvey.Api.Entities.GenreEntity", "Genre")
                         .WithMany("Games")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BigGameSurvey.Api.Entities.Record", b =>
+            modelBuilder.Entity("BigGameSurvey.Api.Entities.RecordEntity", b =>
                 {
-                    b.HasOne("BigGameSurvey.Api.Entities.Game", "Game")
+                    b.HasOne("BigGameSurvey.Api.Entities.GameEntity", "Game")
                         .WithMany("Records")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)

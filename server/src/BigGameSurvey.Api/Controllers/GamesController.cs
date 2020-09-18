@@ -1,12 +1,12 @@
-﻿using System;
+﻿using AutoMapper;
+using BigGameSurvey.Api.Contexts;
+using BigGameSurvey.Api.DTO;
+using BigGameSurvey.Api.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using BigGameSurvey.Api.Contexts;
-using BigGameSurvey.Api.Entities;
 
 namespace BigGameSurvey.Api.Controllers
 {
@@ -15,17 +15,23 @@ namespace BigGameSurvey.Api.Controllers
     public class GamesController : ControllerBase
     {
         private readonly ApiContext _context;
+        private readonly IMapper _mapper;
 
-        public GamesController(ApiContext context)
+        public GamesController(ApiContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Games
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GameEntity>>> GetGames()
+        public async Task<ActionResult<IEnumerable<GameDTO>>> GetGames()
         {
-            return await _context.Games.ToListAsync();
+            var gamesEntity = await _context.Games.ToListAsync();
+
+            var games = _mapper.Map<List<GameDTO>>(gamesEntity);
+
+            return games;
         }
 
         // GET: api/Games/5

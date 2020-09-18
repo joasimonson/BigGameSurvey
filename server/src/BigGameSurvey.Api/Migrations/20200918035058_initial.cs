@@ -28,7 +28,7 @@ namespace BigGameSurvey.Api.Migrations
                     PK_ID = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DS_TITLE = table.Column<string>(maxLength: 50, nullable: false),
-                    DS_PLATFORM = table.Column<string>(maxLength: 20, nullable: false),
+                    FK_PLATFORM = table.Column<int>(nullable: false),
                     FK_GENRE = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

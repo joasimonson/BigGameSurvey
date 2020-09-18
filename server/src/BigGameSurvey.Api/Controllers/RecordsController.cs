@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AutoMapper;
+using BigGameSurvey.Api.Contexts;
+using BigGameSurvey.Api.DTO;
+using BigGameSurvey.Api.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Paging;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using BigGameSurvey.Api.Contexts;
-using BigGameSurvey.Api.Entities;
-using BigGameSurvey.Api.DTO;
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Paging;
 
 namespace BigGameSurvey.Api.Controllers
 {
