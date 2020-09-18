@@ -27,5 +27,11 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.6.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Paging">
+      <HintPath>..\..\..\..\aspnetcore-paging\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Mvc.Paging.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 
 </Project>

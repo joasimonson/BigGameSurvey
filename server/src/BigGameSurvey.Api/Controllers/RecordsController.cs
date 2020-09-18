@@ -9,6 +9,8 @@ using BigGameSurvey.Api.Contexts;
 using BigGameSurvey.Api.Entities;
 using BigGameSurvey.Api.DTO;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Paging;
 
 namespace BigGameSurvey.Api.Controllers
 {
@@ -27,14 +29,18 @@ namespace BigGameSurvey.Api.Controllers
 
         // GET: api/Records
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<RecordDTO>>> GetRecords()
+        public async Task<ActionResult<PagedResult<RecordDTO>>> GetRecords()
         {
-            var rec = await _context.Records
+            var pi = PagingInfo.FromRequest(Request);
+
+            var rec = await Task.FromResult(
+                _context.Records
                 .Include(r => r.Game)
                     .ThenInclude(g => g.Genre)
-                .ToListAsync();
+                .AsQueryable()
+                .ToPagedResult<RecordEntity>(pi, Request));
 
-            var ret = _mapper.Map<List<RecordDTO>>(rec);
+            var ret = _mapper.Map<PagedResult<RecordDTO>>(rec);
 
             return ret;
         }
