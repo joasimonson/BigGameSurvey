@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Pagination from './Pagination';
+import Filters from '../../components/Filters';
 
 import api from '../../services/api';
 import { formatDatetime } from '../../helpers/Datetime';
@@ -8,7 +9,6 @@ import { formatDatetime } from '../../helpers/Datetime';
 import { RecordsResponse } from './types';
 
 import './styles.css';
-import { Link } from 'react-router-dom';
 
 const Records = () => {
     const [ recordsResponse, setRecordsResponse ] = useState<RecordsResponse>();
@@ -29,13 +29,7 @@ const Records = () => {
 
     return (
         <div className="page-container">
-            <div className="filters-container records-actions">
-                <Link to="/charts">
-                    <button className="action-filters">
-                        VER GRÁFICOS
-                    </button>
-                </Link>
-            </div>
+            <Filters link="/charts" linkText="VER GRÁFICO" />
             <table className="records-table" cellPadding="0" cellSpacing="0">
                 <thead>
                     <tr>
