@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="JustPaging.AspNetCore" Version="1.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
@@ -25,12 +26,6 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.6.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.6.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Microsoft.AspNetCore.Mvc.Paging">
-      <HintPath>..\..\..\..\aspnetcore-paging\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Mvc.Paging.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>

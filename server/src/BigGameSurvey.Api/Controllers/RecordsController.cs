@@ -3,7 +3,6 @@ using BigGameSurvey.Api.Contexts;
 using BigGameSurvey.Api.DTO;
 using BigGameSurvey.Api.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Paging;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;

@@ -2,7 +2,7 @@
 using BigGameSurvey.Api.DTO;
 using BigGameSurvey.Api.Entities;
 using BigGameSurvey.Api.Enums;
-using Microsoft.AspNetCore.Mvc.Paging;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BigGameSurvey.Api
 {

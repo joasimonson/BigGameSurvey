@@ -32,7 +32,6 @@ namespace BigGameSurvey.Api
         public void ConfigureServices(IServiceCollection services)
         {
             string databaseUrl = Configuration["DATABASE_URL"];
-            databaseUrl = "";
 
             if (String.IsNullOrWhiteSpace(databaseUrl))
             {
@@ -126,7 +125,7 @@ namespace BigGameSurvey.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -138,9 +137,9 @@ namespace BigGameSurvey.Api
                 opt.SwaggerEndpoint("/swagger/v1/swagger.json", "API ASP.NET Core");
             });
 
-            //var options = new RewriteOptions();
-            //options.AddRedirect("^$", "swagger");
-            //app.UseRewriter(options);
+            var options = new RewriteOptions();
+            options.AddRedirect("^$", "swagger");
+            app.UseRewriter(options);
 
             app.UseCors(opt => opt.AllowAnyOrigin());
 
