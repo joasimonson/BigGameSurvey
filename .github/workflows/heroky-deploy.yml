@@ -23,5 +23,4 @@ jobs:
           docker login --username=_ --password=$HEROKU_KEY registry.heroku.com
           heroku container:push web --app $APP_NAME
           heroku container:release web --app $APP_NAME
-      - name: Info publish
-        run: heroku logs --app $APP_NAME --source $APP_NAME --tail
+          heroku logs --app $APP_NAME --source $APP_NAME --tail
