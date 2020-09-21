@@ -24,4 +24,4 @@ jobs:
           heroku container:push web --app $APP_NAME
           heroku container:release web --app $APP_NAME
       - name: Info publish
-        run: heroku logs --tail
+        run: heroku logs --source $APP_NAME --tail
