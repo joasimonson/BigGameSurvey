@@ -17,11 +17,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build and deploy the Docker image
-        #docker login --username=_ --password=$HEROKU_KEY registry.heroku.com
-        run: |
-          cd ./server/src/BigGameSurvey.Api/
-          docker login --username=_ --password=$(heroku auth:$HEROKU_KEY) registry.heroku.com
-          heroku container:push web --app $APP_NAME
-          heroku container:release web --app $APP_NAME
-          heroku logs --app $APP_NAME --source $APP_NAME --tail
+      - name: Authentication Heroku Registry
+        run: docker login --username=_ --password=$HEROKU_KEY registry.heroku.com
+
+      - name: Select folder application
+        run: cd ./server/src/BigGameSurvey.Api/
+
+      - name: Build and push image
+        run: heroku container:push web --app $APP_NAME
+        
+      - name: Deploy the Docker image
+        run: heroku container:release web --app $APP_NAME
+      
+      - name: Logs
+        run: heroku logs --app $APP_NAME --source $APP_NAME --tail
