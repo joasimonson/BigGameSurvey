@@ -5,7 +5,7 @@
    * [About the project](#about)
    * [Preview online](#preview)
    * [How to run](#run)
-   * [Tecnologias](#tech)
+   * [Technologies](#tech)
 <!--te-->
 
 <h1 name="about">ℹ About the project</h1>
