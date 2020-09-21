@@ -7,10 +7,8 @@ on:
     branches: [ master ]
 
 env:
-  GITHUB_USER: joasimonson
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   HEROKU_KEY: ${{ secrets.HEROKU_KEY }}
-  APP_NAME: BigGameSurvey
+  APP_NAME: biggamesurvey
 
 jobs:
   build:
@@ -27,5 +25,5 @@ jobs:
         run: |
           cd ./server/src/BigGameSurvey.Api/
           docker login --username=_ --password=$HEROKU_KEY registry.heroku.com
-          heroku container:push web -a $APP_NAME
-          heroku container:release web -a $APP_NAME
+          heroku container:push web --app $APP_NAME
+          heroku container:release web --app $APP_NAME
