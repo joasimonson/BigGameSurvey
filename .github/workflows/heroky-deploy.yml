@@ -23,6 +23,9 @@ jobs:
       - name: Select folder application
         run: cd ./server/src/BigGameSurvey.Api/
 
+      - name: Login Heroku
+        run: heroku container:login
+
       - name: Build and push image
         run: heroku container:push web --app $APP_NAME
         
