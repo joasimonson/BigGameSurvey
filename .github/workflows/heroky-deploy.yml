@@ -20,7 +20,7 @@ jobs:
       - name: Build and deploy the Docker image
         run: |
           cd ./server/src/BigGameSurvey.Api/
-          docker login --username=_ --password-stdin=$HEROKU_KEY registry.heroku.com
+          docker login --username=_ --password=$HEROKU_KEY registry.heroku.com
           heroku container:push web --app $APP_NAME
           heroku container:release web --app $APP_NAME
           heroku logs --app $APP_NAME --source $APP_NAME --tail
