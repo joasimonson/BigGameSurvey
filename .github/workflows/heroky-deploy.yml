@@ -10,7 +10,7 @@ env:
   GITHUB_USER: joasimonson
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   HEROKU_KEY: ${{ secrets.HEROKU_KEY }}
-  APP_NAME: ${{ 'BigGameSurvey' }}
+  APP_NAME: BigGameSurvey
 
 jobs:
   build:
