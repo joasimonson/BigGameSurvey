@@ -7,6 +7,7 @@ on:
     branches: [ master ]
 
 env:
+  HEROKU_LOGIN: ${{ secrets.HEROKU_LOGIN }}
   HEROKU_KEY: ${{ secrets.HEROKU_KEY }}
   APP_NAME: biggamesurvey
 
@@ -17,20 +18,27 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Authentication Heroku Registry
-        run: docker login --username=_ --password=$HEROKU_KEY registry.heroku.com
+#      - name: Authentication Heroku Registry
+#        run: docker login --username=_ --password=$HEROKU_KEY registry.heroku.com
 
       - name: Select folder application
         run: cd ./server/src/BigGameSurvey.Api/
 
-      - name: Login Heroku
-        run: heroku container:login
+      - uses: akhileshns/heroku-deploy@v3.5.6
+        with:
+          heroku_api_key: $HEROKU_KEY
+          heroku_app_name: $APP_NAME
+          heroku_email: $HEROKU_LOGIN
+          usedocker: true
 
-      - name: Build and push image
-        run: heroku container:push web --app $APP_NAME
+#      - name: Login Heroku
+#        run: heroku container:login
+
+#      - name: Build and push image
+#        run: heroku container:push web --app $APP_NAME
         
-      - name: Deploy the Docker image
-        run: heroku container:release web --app $APP_NAME
+#      - name: Deploy the Docker image
+#        run: heroku container:release web --app $APP_NAME
       
-      - name: Logs
-        run: heroku logs --app $APP_NAME --source $APP_NAME --tail
+#      - name: Logs
+#        run: heroku logs --app $APP_NAME --source $APP_NAME --tail
