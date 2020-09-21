@@ -12,13 +12,9 @@ env:
 
 jobs:
   build:
-    # Needs to run in this version
-    # Microsoft.Build.BackEnd.NodeFailedToLaunchException: The FileName property should not be a directory unless UseShellExecute is set.
-    runs-on: ubuntu-16.04
-    #runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     
     steps:
-      #- uses: actions/checkout@v1
       - uses: actions/checkout@v2
 
       - name: Build and deploy the Docker image
@@ -27,3 +23,5 @@ jobs:
           docker login --username=_ --password=$HEROKU_KEY registry.heroku.com
           heroku container:push web --app $APP_NAME
           heroku container:release web --app $APP_NAME
+      - name: Info publish
+        run: heroku logs --tail
