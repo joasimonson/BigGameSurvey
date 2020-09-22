@@ -8,10 +8,10 @@ WORKDIR /app
 COPY BigGameSurvey.Api.csproj .
 RUN dotnet restore
 COPY . .
-RUN dotnet build --no-restore -c Release -o /dist
+RUN dotnet build --no-restore -c Release -o dist
 
 FROM build AS publish
-RUN dotnet publish -c Release -o /dist
+RUN dotnet publish -c Release -o dist
 
 FROM base AS final
 WORKDIR /dist
