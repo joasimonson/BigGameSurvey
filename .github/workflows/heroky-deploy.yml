@@ -13,27 +13,35 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-#      - name: Authentication Heroku Registry
-#        run: docker login --username=_ --password=$HEROKU_KEY registry.heroku.com
+      - name: Authentication Heroku Registry
+        run: docker login --username=_ --password=${{ HEROKU_KEY }} registry.heroku.com
 
       - name: Select folder application
         run: cd ./server/src/BigGameSurvey.Api/
 
-      - uses: akhileshns/heroku-deploy@v3.5.6
-        with:
-          heroku_api_key: ${{ secrets.HEROKU_KEY }}
-          heroku_app_name: biggamesurvey
-          heroku_email: ${{ secrets.HEROKU_LOGIN }}
-          usedocker: true
+#      - uses: akhileshns/heroku-deploy@v3.5.6
+#        with:
+#          heroku_api_key: ${{ secrets.HEROKU_KEY }}
+#          heroku_app_name: biggamesurvey
+#          heroku_email: ${{ secrets.HEROKU_LOGIN }}
+#          usedocker: true
 
-#      - name: Login Heroku
-#        run: heroku container:login
+      - name: Login Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_KEY }}
+        run: heroku container:login
 
-#      - name: Build and push image
-#        run: heroku container:push web --app $APP_NAME
+      - name: Build and push image
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_KEY }}
+        run: heroku container:push web --app $APP_NAME
         
-#      - name: Deploy the Docker image
-#        run: heroku container:release web --app $APP_NAME
+      - name: Deploy the Docker image
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_KEY }}
+        run: heroku container:release web --app $APP_NAME
       
-#      - name: Logs
-#        run: heroku logs --app $APP_NAME --source $APP_NAME --tail
+      - name: Logs
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_KEY }}
+        run: heroku logs --app $APP_NAME --source $APP_NAME --tail
