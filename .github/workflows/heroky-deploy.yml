@@ -8,34 +8,36 @@ on:
 
 env:
   APP_NAME: biggamesurvey
+  DIR_PATH: ./server/src/BigGameSurvey.Api/
 
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
     
     steps:
       - uses: actions/checkout@v2
 
-      - name: Select folder application
-        run: cd ./server/src/BigGameSurvey.Api/
-
       - name: Authentication Heroku Registry
         run: docker login --username=_ --password=${{ secrets.HEROKU_API_KEY }} registry.heroku.com
+        
 
       - name: Login Heroku
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        
         run: heroku container:login
 
       - name: Build and push image
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:push web --app $APP_NAME
-        
+        working-directory: $DIR_PATH
+
       - name: Deploy the image
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:release web --app $APP_NAME
+        working-directory: $DIR_PATH
       
       - name: Logs deploy
         env:
