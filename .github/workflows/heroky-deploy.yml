@@ -19,7 +19,10 @@ jobs:
 
       - name: Authentication Heroku Registry
         run: docker login --username=_ --password=${{ secrets.HEROKU_API_KEY }} registry.heroku.com
-        
+        working-directory: $DIR_PATH
+
+      - name: test
+        run: pwd
 
       - name: Login Heroku
         env:
@@ -30,7 +33,9 @@ jobs:
       - name: Build and push image
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:push web --app $APP_NAME
+        run: |
+          pwd
+          heroku container:push web --app $APP_NAME
         working-directory: $DIR_PATH
 
       - name: Deploy the image
