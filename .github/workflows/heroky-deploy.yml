@@ -17,12 +17,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: test
+        run: pwd
+
       - name: Authentication Heroku Registry
         run: docker login --username=_ --password=${{ secrets.HEROKU_API_KEY }} registry.heroku.com
         working-directory: $DIR_PATH
-
-      - name: test
-        run: pwd
 
       - name: Login Heroku
         env:
