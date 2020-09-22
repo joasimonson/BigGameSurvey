@@ -20,13 +20,13 @@ jobs:
       - name: Select folder application
         run: cd ./server/src/BigGameSurvey.Api/
 
+      - name: Authentication Heroku Registry
+        run: docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+
       - name: Login Heroku
         env:
           HEROKU_API_KEY: $HEROKU_API_KEY
         run: heroku container:login
-
-      - name: Authentication Heroku Registry
-        run: docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
 
       - name: Build and push image
         env:
