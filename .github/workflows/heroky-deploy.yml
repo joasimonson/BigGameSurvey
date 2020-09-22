@@ -20,6 +20,17 @@ jobs:
       - name: test
         run: pwd
 
+      - name: test2
+        run: cd $DIR_PATH
+
+      - name: test3
+        run: cd $DIR_PATH
+        working-directory: $DIR_PATH
+
+      - name: test4
+        run: pwd
+        working-directory: $DIR_PATH
+
       - name: Authentication Heroku Registry
         run: docker login --username=_ --password=${{ secrets.HEROKU_API_KEY }} registry.heroku.com
         working-directory: $DIR_PATH
