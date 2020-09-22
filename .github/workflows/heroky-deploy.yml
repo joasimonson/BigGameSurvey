@@ -7,7 +7,6 @@ on:
     branches: [ master ]
 
 env:
-  HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
   APP_NAME: biggamesurvey
 
 jobs:
@@ -21,7 +20,7 @@ jobs:
         run: cd ./server/src/BigGameSurvey.Api/
 
       - name: Authentication Heroku Registry
-        run: docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+        run: docker login --username=_ --password=${{ secrets.HEROKU_API_KEY }} registry.heroku.com
 
       - name: Login Heroku
         env:
@@ -30,15 +29,15 @@ jobs:
 
       - name: Build and push image
         env:
-          HEROKU_API_KEY: $HEROKU_API_KEY
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:push web --app $APP_NAME
         
       - name: Deploy the image
         env:
-          HEROKU_API_KEY: $HEROKU_API_KEY
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:release web --app $APP_NAME
       
       - name: Logs deploy
         env:
-          HEROKU_API_KEY: $HEROKU_API_KEY
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku logs --app $APP_NAME --source $APP_NAME --tail
