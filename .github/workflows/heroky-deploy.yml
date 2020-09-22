@@ -6,34 +6,23 @@ on:
   pull_request:
     branches: [ master ]
 
-env:
-  APP_NAME: biggamesurvey
-  DIR_PATH: /server/src/BigGameSurvey.Api/
-
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-    
+    defaults:
+      run:
+        working-directory: server/src/BigGameSurvey.Api/
+    env:
+      APP_NAME: biggamesurvey
+
     steps:
       - uses: actions/checkout@v2
-
-      - name: test
-        run: pwd
-
-      - name: test2
-        run: cd $DIR_PATH
-
-      - name: test3
-        run: cd $DIR_PATH
-        working-directory: $DIR_PATH
-
+        
       - name: test4
         run: pwd
-        working-directory: $DIR_PATH
 
       - name: Authentication Heroku Registry
         run: docker login --username=_ --password=${{ secrets.HEROKU_API_KEY }} registry.heroku.com
-        working-directory: $DIR_PATH
 
       - name: Login Heroku
         env:
@@ -44,16 +33,12 @@ jobs:
       - name: Build and push image
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: |
-          pwd
-          heroku container:push web --app $APP_NAME
-        working-directory: $DIR_PATH
+        run: heroku container:push web --app $APP_NAME
 
       - name: Deploy the image
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:release web --app $APP_NAME
-        working-directory: $DIR_PATH
       
       - name: Logs deploy
         env:
