@@ -8,7 +8,7 @@ on:
 
 env:
   APP_NAME: biggamesurvey
-  DIR_PATH: ./server/src/BigGameSurvey.Api/
+  DIR_PATH: /server/src/BigGameSurvey.Api/
 
 jobs:
   build-deploy:
