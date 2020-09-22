@@ -18,9 +18,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         
-      - name: test4
-        run: pwd
-
       - name: Authentication Heroku Registry
         run: docker login --username=_ --password=${{ secrets.HEROKU_API_KEY }} registry.heroku.com
 
@@ -39,8 +36,3 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:release web --app $APP_NAME
-      
-      - name: Logs deploy
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku logs --app $APP_NAME --source $APP_NAME --tail
